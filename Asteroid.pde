@@ -1,4 +1,4 @@
-Class Asteroid extends Floater{
+class Asteroid extends Floater{
   public Asteroid(){
     
   }
