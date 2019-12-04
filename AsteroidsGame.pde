@@ -3,6 +3,7 @@ Star[] astra=new Star[100];
 ArrayList <Asteroid> rock = new ArrayList <Asteroid>();
 Asteroid ro;
 boolean rockets = false;
+Bullets bb;
 public void setup() 
 {
   size(500, 500);
@@ -15,6 +16,7 @@ public void setup()
   rock.add(ro);
   }
   ship=new Spaceship();
+  bb=new Bullets(ship);
 }
 public void draw() 
 {
@@ -32,6 +34,7 @@ public void draw()
   for (int i=0; i<100; i++) {
     astra[i].show();
   }
+  bb.show();
 }
 public void keyPressed() {
   if (key == 'h') {
