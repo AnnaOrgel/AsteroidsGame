@@ -12,4 +12,14 @@ class Bullets extends Floater {
     fill(52, 235, 232);
     ellipse((float)myCenterX, (float)myCenterY, 3, 3);
   }
+  public void move(){
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY; 
+  }
+  public float getX(){
+    return (float)myCenterX;
+  }
+  public float getY(){
+    return (float)myCenterY;
+  }
 }

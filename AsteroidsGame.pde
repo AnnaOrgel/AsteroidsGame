@@ -3,7 +3,8 @@ Star[] astra=new Star[100];
 ArrayList <Asteroid> rock = new ArrayList <Asteroid>();
 Asteroid ro;
 boolean rockets = false;
-Bullets bb;
+Bullets b;
+ArrayList <Bullets> bb = new ArrayList <Bullets>();
 public void setup() 
 {
   size(500, 500);
@@ -11,12 +12,11 @@ public void setup()
   for (int i=0; i<100; i++) {
     astra[i]=new Star();
   }
-  for(int i=0; i<10; i++){
-  ro = new Asteroid();
-  rock.add(ro);
+  for (int i=0; i<10; i++) {
+    ro = new Asteroid();
+    rock.add(ro);
   }
   ship=new Spaceship();
-  bb=new Bullets(ship);
 }
 public void draw() 
 {
@@ -24,26 +24,41 @@ public void draw()
   rect(0, 0, 500, 500);
   ship.show();
   ship.move();
-  for(int i=0; i<rock.size()-1; i++){
-  rock.get(i).show();
-  rock.get(i).move();
-     if(dist(rock.get(i).getX(), rock.get(i).getY(), ship.getX(), ship.getY())<20){
+  for (int i=0; i<rock.size()-1; i++) {
+    rock.get(i).show();
+    rock.get(i).move();
+    if (dist(rock.get(i).getX(), rock.get(i).getY(), ship.getX(), ship.getY())<20) {
       rock.remove(rock.get(i));
     }
   }
   for (int i=0; i<100; i++) {
     astra[i].show();
   }
-  bb.show();
+  for (int i=0; i<=bb.size()-1; i++) {
+    b.show();
+    b.move();
+    if (b.getX()>width || b.getX()<0 || b.getY()>height || b.getY()<0) {
+      bb.remove(i);
+    }
+    if(dist(rock.get(i).getX(), rock.get(i).getY(), bb.get(i).getX(), bb.get(i).getY())<20){
+      System.out.println(i);
+      bb.remove(i);
+      rock.remove(i);
+    }
+  }
 }
 public void keyPressed() {
   if (key == 'h') {
     ship.hyperspace();
   }
   if (key == 'a') {
-    ship.accelerate(0.2); 
+    ship.accelerate(0.2);
   }
   if (key == 'r') {
     ship.turn(10);
+  }
+  if (key == 's') {
+    b=new Bullets(ship);
+    bb.add(b);
   }
 }
