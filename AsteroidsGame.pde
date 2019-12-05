@@ -37,13 +37,15 @@ public void draw()
   for (int i=0; i<=bb.size()-1; i++) {
     b.show();
     b.move();
+    for (int j=0; j<rock.size()-1; j++) {
+      if (dist(rock.get(j).getX(), rock.get(j).getY(), bb.get(i).getX(), bb.get(i).getY())<20) {
+        bb.remove(i);
+        rock.remove(j);
+        break;
+      }
+    }
     if (b.getX()>width || b.getX()<0 || b.getY()>height || b.getY()<0) {
       bb.remove(i);
-    }
-    if(dist(rock.get(i).getX(), rock.get(i).getY(), bb.get(i).getX(), bb.get(i).getY())<20){
-      System.out.println(i);
-      bb.remove(i);
-      rock.remove(i);
     }
   }
 }
