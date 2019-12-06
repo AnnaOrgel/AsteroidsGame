@@ -5,6 +5,8 @@ Asteroid ro;
 boolean rockets = false;
 Bullets b;
 ArrayList <Bullets> bb = new ArrayList <Bullets>();
+int health= 140;
+int score = 0;
 public void setup() 
 {
   size(500, 500);
@@ -12,7 +14,7 @@ public void setup()
   for (int i=0; i<100; i++) {
     astra[i]=new Star();
   }
-  for (int i=0; i<10; i++) {
+  for (int i=0; i<20; i++) {
     ro = new Asteroid();
     rock.add(ro);
   }
@@ -22,6 +24,12 @@ public void draw()
 {
   fill(0);
   rect(0, 0, 500, 500);
+  fill(255);
+  textSize(25);
+  text("score: "+score, 30, 460);
+  text("health:", 400, 460);
+  fill(255, 0, 0);
+  rect(350, 470, health, 7);
   ship.show();
   ship.move();
   for (int i=0; i<rock.size()-1; i++) {
@@ -29,6 +37,7 @@ public void draw()
     rock.get(i).move();
     if (dist(rock.get(i).getX(), rock.get(i).getY(), ship.getX(), ship.getY())<20) {
       rock.remove(rock.get(i));
+      health-=20;
     }
   }
   for (int i=0; i<100; i++) {
@@ -41,12 +50,22 @@ public void draw()
       if (dist(rock.get(j).getX(), rock.get(j).getY(), bb.get(i).getX(), bb.get(i).getY())<20) {
         bb.remove(i);
         rock.remove(j);
+        score++;
         break;
       }
     }
     if (b.getX()>width || b.getX()<0 || b.getY()>height || b.getY()<0) {
       bb.remove(i);
     }
+  }
+  if(health==0 || rock.size()==1){
+    fill(0);
+    rect(0, 0, 500, 500);
+    fill(255, 0, 0);
+    textSize(30);
+    text("Game Over", 180, 250);
+    textSize(20);
+    text("Score: "+score, 220, 300);
   }
 }
 public void keyPressed() {
