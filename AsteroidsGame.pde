@@ -22,6 +22,15 @@ public void setup()
 }
 public void draw() 
 {
+  if(health==0 || rock.size()==1){
+    fill(0);
+    rect(0, 0, 500, 500);
+    fill(255, 0, 0);
+    textSize(30);
+    text("Game Over", 180, 250);
+    textSize(20);
+    text("Score: "+score, 220, 300);
+  }else{
   fill(0);
   rect(0, 0, 500, 500);
   fill(255);
@@ -58,14 +67,6 @@ public void draw()
       bb.remove(i);
     }
   }
-  if(health==0 || rock.size()==1){
-    fill(0);
-    rect(0, 0, 500, 500);
-    fill(255, 0, 0);
-    textSize(30);
-    text("Game Over", 180, 250);
-    textSize(20);
-    text("Score: "+score, 220, 300);
   }
 }
 public void keyPressed() {
